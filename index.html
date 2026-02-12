@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LindAR | Consultoría en Teledetección y SIG</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Custom styles for chart containers to meet strict requirements */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px; /* Default height */
+            max-height: 400px;
+        }
+        
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Active tab styling transition */
+        .tab-btn {
+            transition: all 0.3s ease;
+        }
+        .tab-btn.active {
+            background-color: #0d9488; /* teal-600 */
+            color: white;
+            border-color: #0d9488;
+        }
+    </style>
+    <!-- Chosen Palette: Warm Neutrals (Stone/Sand) with Technical Teal and Slate accents. 
+         Background: bg-stone-50 (Warm neutral light)
+         Text: text-slate-800 (Readable dark)
+         Primary Action/Highlight: text-teal-600 / bg-teal-600 (Nature + Tech blend)
+         Secondary: slate-200 (Borders/Separators)
+    -->
+
+    <!-- Application Structure Plan: 
+         1. Hero Section: Immediate value proposition and introduction.
+         2. Interactive Service Hub: The core of the SPA. Instead of a long scroll, a tabbed interface allows users to explore the 4 main business verticals (Agro, Satellite, Drones, Geomarketing). 
+            - Interaction: Clicking a tab updates the text content AND a dynamic chart on the right.
+            - Goal: Demonstrate the "Data -> Insight" value proposition by pairing service descriptions with simulated data visualizations (e.g., NDVI charts for Agro).
+         3. "Why LindAR" Cards: Value pillars presented clearly.
+         4. Process Flow: A visual step-by-step of how they work (Data -> Knowledge).
+         5. Contact/Footer: Clear call to action.
+         
+         This structure transforms a static brochure into an interactive tool where the user "simulates" being a client viewing their data.
+    -->
+
+    <!-- Visualization & Content Choices:
+         1. Service: Agricultura -> Goal: Show monitoring capability -> Viz: Line Chart (NDVI temporal evolution) -> Interaction: Hover to see values -> Lib: Chart.js.
+         2. Service: Geomarketing -> Goal: Show analysis power -> Viz: Horizontal Bar Chart (Demand by Zone) -> Lib: Chart.js.
+         3. Service: Drones -> Goal: Show inspection detail -> Viz: Doughnut Chart (Thermal Anomalies Detected) -> Lib: Chart.js.
+         4. Service: Satellites -> Goal: Show change detection -> Viz: Stacked Bar Chart (Land Use Change) -> Lib: Chart.js.
+         5. Icons -> Goal: Visual cues -> Method: Unicode characters (🛰️, 🚜, 🚁) -> Justification: No SVG allowed.
+    -->
+
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+<body class="bg-stone-50 text-slate-800 font-sans leading-relaxed selection:bg-teal-200">
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-sm border-b border-stone-200 shadow-sm">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <!-- Using Unicode as Logo Placeholder -->
+                <span class="text-3xl text-teal-600">🌐</span>
+                <div class="flex flex-col">
+                    <span class="text-xl font-bold tracking-tight text-slate-900">LindAR</span>
+                    <span class="text-xs text-slate-500 uppercase tracking-widest">Teledetección & SIG</span>
+                </div>
+            </div>
+            <div class="hidden md:flex gap-6 text-sm font-medium text-slate-600">
+                <a href="#inicio" class="hover:text-teal-600 transition-colors">Inicio</a>
+                <a href="#servicios" class="hover:text-teal-600 transition-colors">Servicios</a>
+                <a href="#nosotros" class="hover:text-teal-600 transition-colors">Nosotros</a>
+                <a href="#contacto" class="px-4 py-2 bg-teal-600 text-white rounded-full hover:bg-teal-700 transition-colors">Contacto</a>
+            </div>
+            <!-- Mobile Menu Button (Functional via JS) -->
+            <button id="mobile-menu-btn" class="md:hidden text-2xl text-slate-600">☰</button>
+        </div>
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone-100 p-4 flex flex-col gap-4 shadow-lg">
+            <a href="#inicio" class="block text-slate-600 hover:text-teal-600">Inicio</a>
+            <a href="#servicios" class="block text-slate-600 hover:text-teal-600">Servicios</a>
+            <a href="#nosotros" class="block text-slate-600 hover:text-teal-600">Nosotros</a>
+            <a href="#contacto" class="block font-bold text-teal-600">Contacto</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="relative pt-20 pb-32 overflow-hidden">
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-3xl mx-auto text-center">
+                <span class="inline-block py-1 px-3 rounded-full bg-teal-100 text-teal-800 text-sm font-semibold mb-6">
+                    Ingeniería y Agrimensura
+                </span>
+                <h1 class="text-4xl md:text-6xl font-bold text-slate-900 mb-6 leading-tight">
+                    Transformando información territorial en <span class="text-teal-600">conocimiento útil</span>.
+                </h1>
+                <p class="text-lg md:text-xl text-slate-600 mb-10 max-w-2xl mx-auto">
+                    Servicios de consultoría especializada en Teledetección y Sistemas de Información Geográfica (SIG). Decisiones estratégicas basadas en datos precisos.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#servicios" class="px-8 py-4 bg-teal-600 text-white font-bold rounded-lg shadow-lg hover:bg-teal-700 hover:-translate-y-1 transition-all">
+                        Explorar Soluciones
+                    </a>
+                    <a href="#contacto" class="px-8 py-4 bg-white text-slate-700 font-bold rounded-lg border border-stone-200 shadow-sm hover:bg-stone-50 transition-all">
+                        Solicitar Asesoría
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- Decorative Background Pattern -->
+        <div class="absolute top-0 left-0 w-full h-full -z-10 opacity-10">
+            <div class="absolute right-0 top-0 w-96 h-96 bg-teal-500 rounded-full blur-3xl mix-blend-multiply filter"></div>
+            <div class="absolute left-0 bottom-0 w-96 h-96 bg-blue-500 rounded-full blur-3xl mix-blend-multiply filter"></div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="nosotros" class="py-16 bg-white border-y border-stone-100">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/2">
+                    <div class="bg-stone-100 rounded-2xl p-8 border border-stone-200 relative">
+                        <span class="text-6xl absolute -top-8 -left-8">🎯</span>
+                        <h3 class="text-2xl font-bold mb-4 text-slate-800">Enfoque Multidisciplinario</h3>
+                        <p class="text-slate-600 mb-4">
+                            Somos profesionales de diversas disciplinas geoespaciales, enfocados en transformar datos territoriales en soluciones estratégicas.
+                        </p>
+                        <p class="text-slate-600">
+                            Nuestro equipo desarrolla diagnósticos personalizados, orientados a optimizar recursos y garantizar una mejor toma de decisiones en cada proyecto.
+                        </p>
+                    </div>
+                </div>
+                <div class="md:w-1/2">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-6">¿Por qué LindAR?</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <!-- Card 1 -->
+                        <div class="p-4 border-l-4 border-teal-500 bg-stone-50">
+                            <h4 class="font-bold text-lg mb-2">Conocimiento</h4>
+                            <p class="text-sm text-slate-600">Transformamos datos complejos en diagnósticos claros.</p>
+                        </div>
+                        <!-- Card 2 -->
+                        <div class="p-4 border-l-4 border-blue-500 bg-stone-50">
+                            <h4 class="font-bold text-lg mb-2">Optimización</h4>
+                            <p class="text-sm text-slate-600">Reducción de costos y mejora del manejo productivo.</p>
+                        </div>
+                        <!-- Card 3 -->
+                        <div class="p-4 border-l-4 border-orange-500 bg-stone-50">
+                            <h4 class="font-bold text-lg mb-2">Innovación</h4>
+                            <p class="text-sm text-slate-600">Stack tecnológico avanzado y normalización de datos.</p>
+                        </div>
+                        <!-- Card 4 -->
+                        <div class="p-4 border-l-4 border-purple-500 bg-stone-50">
+                            <h4 class="font-bold text-lg mb-2">Tecnología</h4>
+                            <p class="text-sm text-slate-600">Sensores térmicos, LiDAR y satelitales.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INTERACTIVE SERVICES MODULE -->
+    <section id="servicios" class="py-20 bg-stone-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Nuestras Soluciones</h2>
+                <p class="text-slate-600 max-w-2xl mx-auto">
+                    Explore nuestros servicios interactivos. Seleccione una categoría para ver cómo aplicamos la tecnología geoespacial a sus necesidades.
+                </p>
+            </div>
+
+            <!-- Tabs Navigation -->
+            <div class="flex flex-wrap justify-center gap-2 mb-8">
+                <button class="tab-btn active px-6 py-3 rounded-lg border border-stone-300 font-semibold text-slate-700 bg-white hover:bg-stone-50" onclick="switchTab('agro')">
+                    🌱 Agricultura
+                </button>
+                <button class="tab-btn px-6 py-3 rounded-lg border border-stone-300 font-semibold text-slate-700 bg-white hover:bg-stone-50" onclick="switchTab('satelite')">
+                    🛰️ Monitoreo Satelital
+                </button>
+                <button class="tab-btn px-6 py-3 rounded-lg border border-stone-300 font-semibold text-slate-700 bg-white hover:bg-stone-50" onclick="switchTab('drones')">
+                    🚁 Drones
+                </button>
+                <button class="tab-btn px-6 py-3 rounded-lg border border-stone-300 font-semibold text-slate-700 bg-white hover:bg-stone-50" onclick="switchTab('geomarketing')">
+                    📊 Geomarketing
+                </button>
+            </div>
+
+            <!-- Content Area -->
+            <div class="bg-white rounded-2xl shadow-xl p-6 md:p-10 border border-stone-100">
+                <div class="flex flex-col lg:flex-row gap-10 items-start">
+                    
+                    <!-- Text Content (Dynamic) -->
+                    <div class="lg:w-1/2" id="service-text-container">
+                        <!-- Content injected via JS -->
+                    </div>
+
+                    <!-- Visualization Container (Dynamic) -->
+                    <div class="lg:w-1/2 w-full bg-stone-50 rounded-xl p-4 border border-stone-200">
+                        <div class="flex justify-between items-center mb-4">
+                            <h4 class="text-sm font-bold uppercase tracking-wider text-slate-500" id="viz-title">Análisis de Datos</h4>
+                            <span class="text-xs bg-slate-200 text-slate-600 px-2 py-1 rounded">Simulación Interactiva</span>
+                        </div>
+                        <!-- Chart Container div with strict styling classes -->
+                        <div class="chart-container">
+                            <canvas id="mainChart"></canvas>
+                        </div>
+                        <p id="viz-caption" class="text-xs text-center text-slate-500 mt-4 italic">
+                            El gráfico muestra datos simulados para demostrar la capacidad de análisis.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Process / Contact Pre-footer -->
+    <section class="py-16 bg-slate-900 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-12">De los Datos a la Acción</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+                <!-- Connector Line (Desktop) -->
+                <div class="hidden md:block absolute top-12 left-0 w-full h-1 bg-slate-700 z-0 transform -translate-y-1/2"></div>
+                
+                <div class="relative z-10">
+                    <div class="w-24 h-24 mx-auto bg-slate-800 rounded-full flex items-center justify-center border-4 border-teal-500 mb-4 text-4xl shadow-lg">
+                        📡
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">1. Captura</h3>
+                    <p class="text-slate-400 text-sm">Satélites, Drones y Sensores Terrestres</p>
+                </div>
+                
+                <div class="relative z-10">
+                    <div class="w-24 h-24 mx-auto bg-slate-800 rounded-full flex items-center justify-center border-4 border-blue-500 mb-4 text-4xl shadow-lg">
+                        💻
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">2. Procesamiento</h3>
+                    <p class="text-slate-400 text-sm">Análisis SIG, IA y Teledetección</p>
+                </div>
+                
+                <div class="relative z-10">
+                    <div class="w-24 h-24 mx-auto bg-slate-800 rounded-full flex items-center justify-center border-4 border-orange-500 mb-4 text-4xl shadow-lg">
+                        📈
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">3. Decisión</h3>
+                    <p class="text-slate-400 text-sm">Mapas de prescripción y reportes ejecutivos</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contacto" class="py-20 bg-stone-50">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <div class="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col md:flex-row">
+                <div class="md:w-5/12 bg-teal-700 p-8 text-white flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-6">Contáctanos</h3>
+                        <p class="mb-6 text-teal-100">¿Listo para tu próximo proyecto? Avanzamos con precisión hacia el futuro.</p>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-start gap-3">
+                                <span>📧</span>
+                                <a href="mailto:lindar.agrimensura@gmail.com" class="hover:underline text-sm break-all">lindar.agrimensura@gmail.com</a>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span>📱</span>
+                                <p class="text-sm">351 519 5745</p>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span>📱</span>
+                                <p class="text-sm">340 451 8297</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-8">
+                        <p class="text-xs text-teal-200">Ing. Agrim. Doporto Ignacio</p>
+                        <p class="text-xs text-teal-200">Lic. Mariano Merlo</p>
+                    </div>
+                </div>
+                
+                <div class="md:w-7/12 p-8">
+                    <h3 class="text-xl font-bold text-slate-800 mb-4">Solicitá una asesoría personalizada</h3>
+                    <form class="space-y-4" onsubmit="event.preventDefault(); alert('Gracias por su interés. Este es un demo, por favor use los datos de contacto a la izquierda.');">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Nombre</label>
+                            <input type="text" class="w-full px-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:outline-none" placeholder="Su nombre">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Email</label>
+                            <input type="email" class="w-full px-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:outline-none" placeholder="correo@ejemplo.com">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Interés</label>
+                            <select class="w-full px-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                                <option>Agricultura de Precisión</option>
+                                <option>Monitoreo Satelital</option>
+                                <option>Servicios con Drones</option>
+                                <option>Geomarketing</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="w-full py-3 bg-slate-900 text-white font-bold rounded-lg hover:bg-slate-800 transition-colors">
+                            Enviar Consulta
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-stone-100 py-8 border-t border-stone-200">
+        <div class="container mx-auto px-4 text-center text-slate-500 text-sm">
+            <p>&copy; 2024 LindAR. Ingeniería y Agrimensura.</p>
+            <p class="mt-2 text-xs">Desarrollado con fines demostrativos.</p>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // --- DATA STORE ---
+        const servicesData = {
+            agro: {
+                title: "Soluciones para Agricultura",
+                content: `
+                    <div class="space-y-4 animate-fade-in">
+                        <h3 class="text-2xl font-bold text-teal-700">Agricultura de Precisión</h3>
+                        <p class="text-slate-600">Optimizamos el manejo productivo mediante el uso de herramientas de teledetección y SIG para reducir costos y mejorar la toma de decisiones.</p>
+                        <ul class="space-y-2 text-sm text-slate-700">
+                            <li class="flex items-start gap-2">✅ <strong>Ambientación de lotes:</strong> Generación de mapas de prescripción variable.</li>
+                            <li class="flex items-start gap-2">✅ <strong>Alertas tempranas:</strong> Seguimiento de cultivos mediante índices satelitales (NDVI).</li>
+                            <li class="flex items-start gap-2">✅ <strong>Consultoría rural:</strong> Análisis histórico, riesgos hídricos y aptitud de suelo.</li>
+                            <li class="flex items-start gap-2">✅ <strong>Logística:</strong> Análisis de ubicación óptima para unidades productivas.</li>
+                        </ul>
+                        <div class="mt-4 p-4 bg-teal-50 rounded-lg border border-teal-100">
+                            <p class="text-xs text-teal-800 font-semibold">Valor Agregado:</p>
+                            <p class="text-sm text-teal-700 italic">"Detecte anomalías antes de que sean visibles al ojo humano."</p>
+                        </div>
+                    </div>
+                `,
+                vizTitle: "Evolución NDVI (Cultivo Soja)",
+                vizType: 'line',
+                vizData: {
+                    labels: ['Sem 1', 'Sem 2', 'Sem 3', 'Sem 4', 'Sem 5', 'Sem 6', 'Sem 7', 'Sem 8'],
+                    datasets: [
+                        {
+                            label: 'Lote Optimizado (LindAR)',
+                            data: [0.2, 0.35, 0.55, 0.78, 0.85, 0.82, 0.60, 0.40],
+                            borderColor: '#0d9488', // teal-600
+                            backgroundColor: 'rgba(13, 148, 136, 0.1)',
+                            fill: true,
+                            tension: 0.4
+                        },
+                        {
+                            label: 'Lote Testigo',
+                            data: [0.2, 0.30, 0.45, 0.60, 0.65, 0.60, 0.50, 0.35],
+                            borderColor: '#94a3b8', // slate-400
+                            borderDash: [5, 5],
+                            fill: false,
+                            tension: 0.4
+                        }
+                    ]
+                }
+            },
+            satelite: {
+                title: "Monitoreo Satelital",
+                content: `
+                    <div class="space-y-4 animate-fade-in">
+                        <h3 class="text-2xl font-bold text-blue-700">Monitoreo Satelital</h3>
+                        <p class="text-slate-600">Procesamiento masivo de imágenes para el seguimiento diagnóstico y evaluación de procesos territoriales a gran escala.</p>
+                        <ul class="space-y-2 text-sm text-slate-700">
+                            <li class="flex items-start gap-2">🛰️ <strong>Estudios multitemporales:</strong> Análisis histórico de fenómenos naturales o antrópicos.</li>
+                            <li class="flex items-start gap-2">🛰️ <strong>Detección de cambios:</strong> Deforestación, reforestación e impacto de inundaciones.</li>
+                            <li class="flex items-start gap-2">🛰️ <strong>Tecnología Radar:</strong> Interferometría para Modelos Digitales de Elevación (MDE) y Desplazamiento (MDD).</li>
+                        </ul>
+                        <div class="mt-4 p-4 bg-blue-50 rounded-lg border border-blue-100">
+                            <p class="text-xs text-blue-800 font-semibold">Aplicación Clave:</p>
+                            <p class="text-sm text-blue-700 italic">"Monitoreo de inundaciones y desplazamiento de terreno milimétrico."</p>
+                        </div>
+                    </div>
+                `,
+                vizTitle: "Análisis de Cobertura de Suelo",
+                vizType: 'bar',
+                vizData: {
+                    labels: ['Bosque Nativo', 'Cultivo', 'Agua', 'Suelo Desnudo', 'Urbano'],
+                    datasets: [
+                        {
+                            label: '2020',
+                            data: [400, 300, 150, 100, 50],
+                            backgroundColor: '#93c5fd' // blue-300
+                        },
+                        {
+                            label: '2024 (Actual)',
+                            data: [380, 350, 140, 80, 80],
+                            backgroundColor: '#2563eb' // blue-600
+                        }
+                    ]
+                }
+            },
+            drones: {
+                title: "Servicios con Drones",
+                content: `
+                    <div class="space-y-4 animate-fade-in">
+                        <h3 class="text-2xl font-bold text-orange-600">Inspecciones con Drones</h3>
+                        <p class="text-slate-600">Relevamientos de alta precisión equipados con sensores térmicos, LiDAR y multiespectrales. Entregamos modelos 3D y reportes accionables.</p>
+                        <ul class="space-y-2 text-sm text-slate-700">
+                            <li class="flex items-start gap-2">🚁 <strong>Termografía:</strong> Detección de puntos calientes en paneles solares y líneas eléctricas.</li>
+                            <li class="flex items-start gap-2">🚁 <strong>LiDAR + RTK:</strong> Topografía de detalle, curvas de nivel y volumetría de acopios.</li>
+                            <li class="flex items-start gap-2">🚁 <strong>Conteo de Plantas:</strong> Inventario preciso y detección de malezas (Weed detection).</li>
+                        </ul>
+                    </div>
+                `,
+                vizTitle: "Informe de Inspección Térmica (Solar)",
+                vizType: 'doughnut',
+                vizData: {
+                    labels: ['Paneles Normales', 'Hotspots Leves', 'Falla Crítica', 'Suciedad/Sombra'],
+                    datasets: [{
+                        data: [85, 8, 2, 5],
+                        backgroundColor: [
+                            '#d1fae5', // emerald-100
+                            '#fde047', // yellow-300
+                            '#ef4444', // red-500
+                            '#94a3b8'  // slate-400
+                        ],
+                        borderWidth: 0
+                    }]
+                }
+            },
+            geomarketing: {
+                title: "Geomarketing y Datos",
+                content: `
+                    <div class="space-y-4 animate-fade-in">
+                        <h3 class="text-2xl font-bold text-purple-700">Inteligencia Geográfica</h3>
+                        <p class="text-slate-600">Cruce de variables espaciales para la toma de decisiones de negocio. ¿Dónde ubicar su próxima sucursal? ¿Dónde están sus clientes?</p>
+                        <ul class="space-y-2 text-sm text-slate-700">
+                            <li class="flex items-start gap-2">📊 <strong>Localización de Demanda:</strong> Mapas de calor de clientes potenciales.</li>
+                            <li class="flex items-start gap-2">📊 <strong>Logística:</strong> Análisis de isócronas (tiempo de viaje) y cercanía a proveedores.</li>
+                            <li class="flex items-start gap-2">📊 <strong>Tableros Web:</strong> Gestión y normalización de información en Geoportales interactivos.</li>
+                        </ul>
+                    </div>
+                `,
+                vizTitle: "Análisis de Potencial de Demanda por Zona",
+                vizType: 'bar',
+                vizData: {
+                    labels: ['Zona Norte', 'Zona Sur', 'Zona Este', 'Zona Oeste', 'Centro'],
+                    datasets: [{
+                        label: 'Índice de Demanda Potencial',
+                        data: [85, 45, 60, 30, 95],
+                        backgroundColor: [
+                            '#a855f7', // purple-500
+                            '#d8b4fe',
+                            '#c084fc',
+                            '#e9d5ff',
+                            '#7e22ce'
+                        ],
+                        borderWidth: 0,
+                        indexAxis: 'y' // Horizontal bar chart
+                    }]
+                }
+            }
+        };
+
+        // --- STATE & INITIALIZATION ---
+        let currentChart = null;
+
+        // --- CORE FUNCTIONS ---
+        function switchTab(serviceKey) {
+            // Update UI Buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Get Data
+            const data = servicesData[serviceKey];
+
+            // Update Text Content
+            const textContainer = document.getElementById('service-text-container');
+            textContainer.innerHTML = data.content;
+
+            // Update Visualization Title
+            document.getElementById('viz-title').textContent = data.vizTitle;
+
+            // Render Chart
+            renderChart(data.vizType, data.vizData);
+        }
+
+        function renderChart(type, data) {
+            const ctx = document.getElementById('mainChart').getContext('2d');
+            
+            // Destroy existing chart if present
+            if (currentChart) {
+                currentChart.destroy();
+            }
+
+            // Chart Configuration
+            const config = {
+                type: type,
+                data: data,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false, // Critical for container responsiveness
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                usePointStyle: true,
+                                boxWidth: 8
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                            titleColor: '#1e293b',
+                            bodyColor: '#475569',
+                            borderColor: '#e2e8f0',
+                            borderWidth: 1,
+                            padding: 10
+                        }
+                    },
+                    scales: type === 'doughnut' ? {} : { // No scales for doughnut
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: '#f1f5f9'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            };
+
+            currentChart = new Chart(ctx, config);
+        }
+
+        // --- MOBILE MENU LOGIC ---
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close menu when clicking a link
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // --- INIT ---
+        // Load initial tab (Agro)
+        document.addEventListener('DOMContentLoaded', () => {
+            // Simulate click on first tab
+            document.querySelector('.tab-btn').click();
+        });
+
+    </script>
+</body>
+</html>
