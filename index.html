@@ -4,8 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LindAR | Ingeniería, Agrimensura y Teledetección</title>
+    
+    <!-- Fuentes Google Fonts: Montserrat (Títulos) y Lato (Texto) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Configuración de Marca LindAR -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        lindar: {
+                            teal: '#1B4D50',    // Color principal
+                            light: '#E0F2F1',   // Fondo suave
+                            copper: '#C16E41',  // Color secundario (ACENTO UNIFICADO)
+                            dark: '#13383A'     // Para fondos oscuros
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Lato', 'sans-serif'],
+                        heading: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
     <style>
         .chart-container {
             position: relative;
@@ -17,205 +46,249 @@
             max-height: 400px;
         }
         html { scroll-behavior: smooth; }
+        
+        /* Botones de Pestañas */
         .tab-btn { transition: all 0.3s ease; }
         .tab-btn.active {
-            background-color: #0d9488;
+            background-color: #1B4D50;
             color: white;
-            border-color: #0d9488;
+            border-color: #1B4D50;
         }
-        .unit-card { transition: transform 0.3s ease, border-color 0.3s ease; }
-        .unit-card:hover { transform: translateY(-5px); border-color: #0d9488; }
         
-        /* Estilo para el logo dual en el nav */
+        .unit-card { transition: transform 0.3s ease, border-color 0.3s ease; border-width: 2px; }
+        .unit-card:hover { transform: translateY(-5px); border-color: #C16E41; }
+        
         .brand-divider {
             width: 1px;
-            height: 30px;
-            background-color: #e2e8f0;
-            margin: 0 12px;
+            height: 35px;
+            background-color: #cbd5e1;
+            margin: 0 16px;
         }
     </style>
 </head>
-<body class="bg-stone-50 text-slate-800 font-sans">
+<body class="bg-gray-50 text-gray-700 font-sans">
 
-    <!-- Navegación con Doble Identidad -->
-    <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-stone-200 shadow-sm">
+    <!-- Navegación con Doble Identidad (Orden Invertido) -->
+    <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-sm">
         <div class="container mx-auto px-4 py-3 flex flex-wrap justify-between items-center">
-            <!-- Logos de Unidades de Negocio -->
             <div class="flex items-center">
-                <!-- Unidad 1 -->
-                <a href="#seccion-agrimensura" class="flex items-center gap-2 group">
-                    <span class="text-2xl group-hover:scale-110 transition-transform">📐</span>
-                    <div class="flex flex-col">
-                        <span class="text-sm font-bold text-slate-900 leading-none">LindAR</span>
-                        <span class="text-[10px] text-teal-600 font-bold uppercase tracking-tighter">Agrimensura</span>
+                <!-- Unidad 1: Teledetección -->
+                <a href="#seccion-teledeteccion" class="flex items-center gap-2 group">
+                    <span class="text-3xl group-hover:scale-110 transition-transform">🛰️</span>
+                    <div class="flex flex-col font-heading">
+                        <span class="text-xl font-bold text-lindar-teal leading-none tracking-tight">Lind<span class="text-lindar-copper">AR</span></span>
+                        <span class="text-[10px] text-lindar-copper font-bold uppercase tracking-widest">Teledetección & SIG</span>
                     </div>
                 </a>
                 
                 <div class="brand-divider hidden sm:block"></div>
                 
-                <!-- Unidad 2 -->
-                <a href="#seccion-teledeteccion" class="flex items-center gap-2 group ml-4 sm:ml-0">
-                    <span class="text-2xl group-hover:scale-110 transition-transform">🛰️</span>
-                    <div class="flex flex-col">
-                        <span class="text-sm font-bold text-slate-900 leading-none">LindAR</span>
-                        <span class="text-[10px] text-blue-600 font-bold uppercase tracking-tighter">Teledetección & SIG</span>
+                <!-- Unidad 2: Agrimensura -->
+                <a href="#seccion-agrimensura" class="flex items-center gap-2 group ml-4 sm:ml-0">
+                    <span class="text-3xl group-hover:scale-110 transition-transform">📐</span>
+                    <div class="flex flex-col font-heading">
+                        <span class="text-xl font-bold text-lindar-teal leading-none tracking-tight">Lind<span class="text-lindar-copper">AR</span></span>
+                        <span class="text-[10px] text-lindar-teal font-bold uppercase tracking-widest">Ingeniería y Agrimensura</span>
                     </div>
                 </a>
             </div>
 
             <!-- Enlaces Rápidos -->
-            <div class="hidden lg:flex gap-6 text-xs font-semibold uppercase tracking-widest">
-                <a href="#inicio" class="hover:text-teal-600 py-2">Inicio</a>
-                <a href="#contacto" class="px-4 py-2 bg-slate-900 text-white rounded-md hover:bg-slate-700 transition-colors">Contacto</a>
+            <div class="hidden lg:flex gap-6 text-xs font-heading font-bold uppercase tracking-widest">
+                <a href="#inicio" class="text-gray-500 hover:text-lindar-copper py-2 transition-colors">Inicio</a>
+                <a href="#contacto" class="px-5 py-2 bg-lindar-teal text-white rounded-md hover:bg-lindar-dark transition-colors shadow-md">Contacto</a>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Unificado -->
-    <section id="inicio" class="pt-16 pb-12 px-4 bg-gradient-to-b from-white to-stone-50 border-b border-stone-100">
+    <!-- Hero -->
+    <section id="inicio" class="pt-20 pb-16 px-4 bg-gradient-to-b from-white to-lindar-light border-b border-gray-200">
         <div class="container mx-auto text-center max-w-4xl">
-            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 italic tracking-tight">Precisión territorial, visión estratégica.</h1>
-            <p class="text-lg text-slate-600 mb-8 max-w-2xl mx-auto">Fusionamos la ingeniería tradicional con tecnología geoespacial de vanguardia para potenciar sus proyectos.</p>
+            <h1 class="text-4xl md:text-6xl font-heading font-extrabold text-lindar-teal mb-6 leading-tight">
+                Para proyectos que <span class="text-lindar-copper border-b-4 border-lindar-copper/20">avanzan</span>.
+            </h1>
+            <p class="text-xl text-gray-600 mb-10 max-w-2xl mx-auto font-light">
+                Fusionamos la precisión de la agrimensura tradicional con la innovación de la inteligencia geoespacial.
+            </p>
         </div>
     </section>
 
-    <!-- BLOQUE 1: INGENIERÍA Y AGRIMENSURA -->
-    <section id="seccion-agrimensura" class="py-16 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 border-b border-stone-100 pb-4">
-                <div>
-                    <span class="text-teal-600 font-bold uppercase tracking-widest text-xs">Unidad de Negocio 01</span>
-                    <h2 class="text-3xl font-black text-slate-900">LindAR Ingeniería y Agrimensura</h2>
+    <!-- Selector de Unidades de Negocio -->
+    <section id="unidades" class="pb-20 px-4 -mt-10">
+        <div class="container mx-auto max-w-5xl">
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Bloque Teledetección -->
+                <div onclick="scrollToSection('seccion-teledeteccion')" class="unit-card cursor-pointer bg-white p-8 rounded-2xl border-transparent shadow-lg text-center relative overflow-hidden group">
+                    <div class="absolute top-0 left-0 w-2 h-full bg-lindar-copper"></div>
+                    <span class="text-5xl mb-6 block">🛰️</span>
+                    <h2 class="text-2xl font-heading font-bold text-lindar-teal mb-3">Teledetección & SIG</h2>
+                    <p class="text-gray-500 text-sm leading-relaxed">Agricultura de precisión, monitoreo satelital, drones y análisis de inteligencia geográfica.</p>
+                    <button class="mt-8 text-lindar-copper font-bold text-sm uppercase tracking-wider group-hover:underline">Explorar Servicios →</button>
                 </div>
-                <p class="text-slate-500 text-sm md:max-w-xs mt-2 md:mt-0 italic">"Para proyectos que avanzan."</p>
+
+                <!-- Bloque Agrimensura -->
+                <div onclick="scrollToSection('seccion-agrimensura')" class="unit-card cursor-pointer bg-white p-8 rounded-2xl border-transparent shadow-lg text-center relative overflow-hidden group">
+                    <div class="absolute top-0 left-0 w-2 h-full bg-lindar-teal"></div>
+                    <span class="text-5xl mb-6 block">📐</span>
+                    <h2 class="text-2xl font-heading font-bold text-lindar-teal mb-3">Ingeniería y Agrimensura</h2>
+                    <p class="text-gray-500 text-sm leading-relaxed">Mensuras legales, amojonamientos y topografía de precisión para obras civiles y viales.</p>
+                    <button class="mt-8 text-lindar-copper font-bold text-sm uppercase tracking-wider group-hover:underline">Explorar Servicios →</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BLOQUE 1: TELEDETECCIÓN Y SIG -->
+    <section id="seccion-teledeteccion" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 border-b border-gray-200 pb-6">
+                <div>
+                    <!-- Eliminado etiqueta de unidad de negocio -->
+                    <h2 class="text-3xl md:text-4xl font-heading font-black text-lindar-teal mt-1">LindAR <span class="font-light">Teledetección & SIG</span></h2>
+                </div>
+                <p class="text-gray-400 text-sm md:max-w-xs mt-4 md:mt-0 italic font-serif">"Datos que transforman decisiones."</p>
             </div>
 
-            <h4 class="text-sm font-bold text-slate-400 mb-4 uppercase">Nuestras Soluciones</h4>
-            <div class="flex flex-wrap gap-2 mb-8">
-                <button id="btn-agri_legal" class="tab-btn active px-4 py-2 rounded-lg border border-stone-200 text-sm font-bold" onclick="showService('agri_legal', 'chart-agri', this)">📍 Agrimensura Legal</button>
-                <button id="btn-agri_obras" class="tab-btn px-4 py-2 rounded-lg border border-stone-200 text-sm font-bold" onclick="showService('agri_obras', 'chart-agri', this)">🏗️ Topografía y Obras</button>
+            <div class="flex flex-wrap gap-3 mb-10">
+                <button id="btn-tele_agro" class="tab-btn active px-5 py-2 rounded-lg border border-gray-200 text-sm font-bold shadow-sm" onclick="showService('tele_agro', 'chart-tele', this)">🌱 Agro Precisión</button>
+                <button id="btn-tele_sat" class="tab-btn px-5 py-2 rounded-lg border border-gray-200 text-sm font-bold shadow-sm" onclick="showService('tele_sat', 'chart-tele', this)">🌍 Satelital</button>
+                <button id="btn-tele_drones" class="tab-btn px-5 py-2 rounded-lg border border-gray-200 text-sm font-bold shadow-sm" onclick="showService('tele_drones', 'chart-tele', this)">🛸 Drones</button>
+                <button id="btn-tele_data" class="tab-btn px-5 py-2 rounded-lg border border-gray-200 text-sm font-bold shadow-sm" onclick="showService('tele_data', 'chart-tele', this)">📊 Datos</button>
             </div>
 
-            <div id="display-agri" class="grid lg:grid-cols-2 gap-12 items-center bg-stone-50 p-6 md:p-10 rounded-3xl border border-stone-200">
+            <div id="display-tele" class="grid lg:grid-cols-2 gap-12 items-center bg-white p-8 md:p-12 rounded-3xl border border-gray-200 shadow-sm">
                 <!-- Se inyecta contenido -->
             </div>
         </div>
     </section>
 
-    <!-- BLOQUE 2: TELEDETECCIÓN Y SIG -->
-    <section id="seccion-teledeteccion" class="py-16 bg-slate-50 border-t border-stone-200">
+    <!-- BLOQUE 2: INGENIERÍA Y AGRIMENSURA -->
+    <section id="seccion-agrimensura" class="py-20 bg-white border-t border-gray-200">
         <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 border-b border-stone-200 pb-4">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 border-b border-gray-100 pb-6">
                 <div>
-                    <span class="text-blue-600 font-bold uppercase tracking-widest text-xs">Unidad de Negocio 02</span>
-                    <h2 class="text-3xl font-black text-slate-900">LindAR Teledetección & SIG</h2>
+                    <!-- Eliminado etiqueta de unidad de negocio -->
+                    <h2 class="text-3xl md:text-4xl font-heading font-black text-lindar-teal mt-1">LindAR <span class="font-light">Agrimensura</span></h2>
                 </div>
-                <p class="text-slate-500 text-sm md:max-w-xs mt-2 md:mt-0 italic">"Conocimiento territorial aplicado."</p>
+                <p class="text-gray-400 text-sm md:max-w-xs mt-4 md:mt-0 italic font-serif">"Seguridad jurídica y precisión técnica."</p>
             </div>
 
-            <h4 class="text-sm font-bold text-slate-400 mb-4 uppercase">Nuestras Soluciones</h4>
-            <div class="flex flex-wrap gap-2 mb-8">
-                <button id="btn-tele_agro" class="tab-btn active px-4 py-2 rounded-lg border border-stone-200 text-sm font-bold" onclick="showService('tele_agro', 'chart-tele', this)">🌱 Agro de Precisión</button>
-                <button id="btn-tele_sat" class="tab-btn px-4 py-2 rounded-lg border border-stone-200 text-sm font-bold" onclick="showService('tele_sat', 'chart-tele', this)">🌍 Monitoreo Satelital</button>
-                <button id="btn-tele_drones" class="tab-btn px-4 py-2 rounded-lg border border-stone-200 text-sm font-bold" onclick="showService('tele_drones', 'chart-tele', this)">🛸 Drones y LiDAR</button>
-                <button id="btn-tele_data" class="tab-btn px-4 py-2 rounded-lg border border-stone-200 text-sm font-bold" onclick="showService('tele_data', 'chart-tele', this)">📊 Inteligencia de Datos</button>
+            <div class="flex flex-wrap gap-3 mb-10">
+                <button id="btn-agri_legal" class="tab-btn active px-6 py-3 rounded-lg border border-gray-200 text-sm font-bold shadow-sm" onclick="showService('agri_legal', 'chart-agri', this)">⚖️ Legal y Urbana</button>
+                <button id="btn-agri_obras" class="tab-btn px-6 py-3 rounded-lg border border-gray-200 text-sm font-bold shadow-sm" onclick="showService('agri_obras', 'chart-agri', this)">🏢 Obras y Topografía</button>
             </div>
 
-            <div id="display-tele" class="grid lg:grid-cols-2 gap-12 items-center bg-white p-6 md:p-10 rounded-3xl border border-stone-200 shadow-sm">
+            <div id="display-agri" class="grid lg:grid-cols-2 gap-12 items-center bg-lindar-light/30 p-8 md:p-12 rounded-3xl border border-lindar-teal/10">
                 <!-- Se inyecta contenido -->
             </div>
         </div>
     </section>
 
     <!-- Contacto Unificado -->
-    <footer id="contacto" class="py-20 bg-slate-900 text-white">
-        <div class="container mx-auto px-4 max-w-4xl">
+    <footer id="contacto" class="py-24 bg-lindar-dark text-white relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-lindar-teal rounded-full blur-3xl opacity-20 -translate-y-1/2 translate-x-1/2"></div>
+        
+        <div class="container mx-auto px-4 max-w-5xl relative z-10">
             <div class="text-center mb-16">
-                <h2 class="text-4xl font-black mb-4">¿Listo para potenciar su proyecto?</h2>
-                <p class="text-slate-400 text-lg">Solicite una asesoría personalizada con nuestro equipo multidisciplinario.</p>
+                <span class="text-lindar-copper font-bold uppercase tracking-widest text-xs mb-2 block font-heading">Hablemos</span>
+                <h2 class="text-4xl md:text-5xl font-heading font-black mb-6">¿Listo para potenciar su proyecto?</h2>
+                <p class="text-gray-400 text-lg font-light">Solicite una asesoría personalizada con nuestro equipo.</p>
             </div>
             
             <div class="grid md:grid-cols-2 gap-8">
                 <!-- Profesional 1 -->
-                <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 hover:border-teal-500 transition-colors">
-                    <div class="flex items-center gap-4 mb-4">
-                        <div class="w-12 h-12 bg-teal-600/20 rounded-full flex items-center justify-center text-teal-500 text-xl font-bold italic">ID</div>
+                <div class="bg-white/5 p-8 rounded-2xl border border-white/10 hover:border-lindar-copper/50 transition-colors backdrop-blur-sm">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-14 h-14 bg-lindar-copper rounded-full flex items-center justify-center text-white text-xl font-bold font-heading shadow-lg">ID</div>
                         <div>
-                            <p class="text-xl font-bold">Ing. Agrim. Doporto Ignacio</p>
-                            <p class="text-teal-500 text-sm font-semibold uppercase tracking-wider">Agrimensura e Ingeniería</p>
+                            <p class="text-xl font-bold font-heading">Ing. Agrim. Doporto Ignacio</p>
+                            <p class="text-lindar-copper text-xs font-bold uppercase tracking-widest">Agrimensura e Ingeniería</p>
                         </div>
                     </div>
-                    <div class="space-y-2 text-slate-300 text-sm">
-                        <p class="flex items-center gap-2">📧 lindar.agrimensura@gmail.com</p>
-                        <p class="flex items-center gap-2">📱 351 519 5745</p>
+                    <div class="space-y-3 text-gray-300 text-sm">
+                        <a href="mailto:lindar.agrimensura@gmail.com" class="flex items-center gap-3 hover:text-white transition-colors">
+                            <span class="bg-white/10 p-2 rounded-full">📧</span> lindar.agrimensura@gmail.com
+                        </a>
+                        <a href="https://wa.me/5493515195745" target="_blank" class="flex items-center gap-3 hover:text-white transition-colors">
+                            <span class="bg-white/10 p-2 rounded-full">💬</span> WhatsApp: 351 519 5745
+                        </a>
                     </div>
                 </div>
 
                 <!-- Profesional 2 -->
-                <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 hover:border-blue-500 transition-colors">
-                    <div class="flex items-center gap-4 mb-4">
-                        <div class="w-12 h-12 bg-blue-600/20 rounded-full flex items-center justify-center text-blue-500 text-xl font-bold italic">MM</div>
+                <div class="bg-white/5 p-8 rounded-2xl border border-white/10 hover:border-lindar-copper/50 transition-colors backdrop-blur-sm">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-14 h-14 bg-lindar-copper rounded-full flex items-center justify-center text-white text-xl font-bold font-heading shadow-lg">MM</div>
                         <div>
-                            <p class="text-xl font-bold">Lic. Mariano Merlo</p>
-                            <p class="text-blue-500 text-sm font-semibold uppercase tracking-wider">Teledetección y SIG</p>
+                            <p class="text-xl font-bold font-heading">Lic. Mariano Merlo</p>
+                            <p class="text-lindar-copper text-xs font-bold uppercase tracking-widest">Teledetección y SIG</p>
                         </div>
                     </div>
-                    <div class="space-y-2 text-slate-300 text-sm">
-                        <p class="flex items-center gap-2">📱 340 451 8297</p>
-                        <p class="text-xs text-slate-500 mt-2 italic">Expertos en diversas áreas geoespaciales.</p>
+                    <div class="space-y-3 text-gray-300 text-sm">
+                        <a href="https://wa.me/5493404518297" target="_blank" class="flex items-center gap-3 hover:text-white transition-colors">
+                            <span class="bg-white/10 p-2 rounded-full">💬</span> WhatsApp: 340 451 8297
+                        </a>
+                        <p class="text-xs text-gray-500 mt-4 italic border-t border-white/5 pt-4">Expertos en diversas áreas geoespaciales.</p>
                     </div>
                 </div>
             </div>
 
-            <div class="mt-20 pt-8 border-t border-slate-800 text-center text-slate-500 text-xs">
-                <p>© 2024 LindAR - Soluciones Territoriales Integrales.</p>
+            <div class="mt-20 pt-8 border-t border-white/10 text-center text-gray-500 text-xs flex justify-between items-center flex-col md:flex-row">
+                <p>© 2026 LindAR - Soluciones Territoriales Integrales.</p>
+                <p class="mt-2 md:mt-0 font-heading font-bold text-lindar-teal">LIND<span class="text-lindar-copper">AR</span></p>
             </div>
         </div>
     </footer>
 
     <script>
+        const colors = {
+            teal: '#1B4D50',
+            copper: '#C16E41',
+            lightTeal: '#E0F2F1'
+        };
+
         const services = {
             agri_legal: {
                 title: "Agrimensura Legal y Urbana",
                 desc: "Garantizamos la seguridad jurídica de su inmueble mediante mediciones precisas y trámites especializados.",
                 list: ["Amojonamientos de lotes", "Mensuras urbanas y rurales", "Verificación de Estado Parcelario (VEP)", "Subdivisiones y uniones"],
                 chartType: 'doughnut',
-                chartData: { labels: ['Urbano', 'Rural', 'VEP', 'Otros'], datasets: [{ data: [45, 25, 20, 10], backgroundColor: ['#0d9488', '#14b8a6', '#5eead4', '#ccfbf1'] }] }
+                chartData: { labels: ['Urbano', 'Rural', 'VEP', 'Otros'], datasets: [{ data: [45, 25, 20, 10], backgroundColor: [colors.teal, '#2C7A7F', colors.copper, '#B2DFDB'], borderWidth: 0 }] }
             },
             agri_obras: {
                 title: "Relevamientos y Obras",
                 desc: "Soporte técnico integral para proyectos de infraestructura, minería y arquitectura.",
                 list: ["Replanteos de alta precisión", "Obras viales y civiles", "Minería e Hidráulica", "Modelos digitales del terreno"],
                 chartType: 'bar',
-                chartData: { labels: ['Vial', 'Civil', 'Minera', 'Hidráulica'], datasets: [{ label: 'Proyectos Activos', data: [12, 18, 5, 8], backgroundColor: '#0d9488' }] }
+                chartData: { labels: ['Vial', 'Civil', 'Minera', 'Hydráulica'], datasets: [{ label: 'Proyectos Activos', data: [12, 18, 5, 8], backgroundColor: colors.teal }] }
             },
             tele_agro: {
                 title: "Agricultura de Precisión",
                 desc: "Optimización de recursos mediante el análisis espacial del rendimiento y la salud del cultivo.",
                 list: ["Ambientación de lotes", "Mapas de prescripción variable", "Alertas tempranas (NDVI/EVI)", "Análisis de aptitud de suelo"],
                 chartType: 'line',
-                chartData: { labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May'], datasets: [{ label: 'Vigor Vegetativo', data: [0.2, 0.45, 0.85, 0.7, 0.4], borderColor: '#3b82f6', tension: 0.4 }] }
+                chartData: { labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May'], datasets: [{ label: 'Vigor Vegetativo', data: [0.2, 0.45, 0.85, 0.7, 0.4], borderColor: colors.copper, backgroundColor: 'rgba(193, 110, 65, 0.1)', fill: true, tension: 0.4 }] }
             },
             tele_sat: {
                 title: "Monitoreo Satelital",
                 desc: "Diagnóstico detallado de cambios territoriales y fenómenos ambientales.",
                 list: ["Detección de deforestación", "Estudios multitemporales", "Tecnología Radar (MDE/MDD)", "Gestión de riesgos hídricos"],
                 chartType: 'pie',
-                chartData: { labels: ['Bosque', 'Cultivo', 'Suelo Desnudo', 'Agua'], datasets: [{ data: [40, 30, 20, 10], backgroundColor: ['#2563eb', '#3b82f6', '#60a5fa', '#93c5fd'] }] }
+                chartData: { labels: ['Bosque', 'Cultivo', 'Suelo Desnudo', 'Agua'], datasets: [{ data: [40, 30, 20, 10], backgroundColor: [colors.teal, colors.copper, '#60a5fa', '#93c5fd'], borderWidth: 0 }] }
             },
             tele_drones: {
                 title: "Drones y LiDAR",
                 desc: "Captura de datos de altísima resolución para modelado 3D y termografía.",
                 list: ["Topografía LiDAR + RTK", "Inspecciones termográficas", "Conteo de plantas y malezas", "Ortofotomosaicos HD"],
                 chartType: 'bar',
-                chartData: { labels: ['LiDAR', 'Térmico', 'RGB', 'Multispectral'], datasets: [{ label: 'Precisión (cm)', data: [3, 15, 2, 5], backgroundColor: '#3b82f6' }] }
+                chartData: { labels: ['LiDAR', 'Térmico', 'RGB', 'Multispectral'], datasets: [{ label: 'Precisión (cm)', data: [3, 15, 2, 5], backgroundColor: colors.copper }] }
             },
             tele_data: {
                 title: "Inteligencia Geográfica",
                 desc: "Cruce estratégico de variables para la toma de decisiones comerciales y logísticas.",
                 list: ["Geomarketing y análisis de mercado", "Logística y distribución", "Gestión de geoportales web", "Tableros de control de datos"],
                 chartType: 'doughnut',
-                chartData: { labels: ['Logística', 'Marketing', 'Estratégico', 'Web'], datasets: [{ data: [35, 25, 30, 10], backgroundColor: ['#1d4ed8', '#2563eb', '#3b82f6', '#60a5fa'] }] }
+                chartData: { labels: ['Logística', 'Marketing', 'Estratégico', 'Web'], datasets: [{ data: [35, 25, 30, 10], backgroundColor: [colors.teal, colors.copper, '#3b82f6', '#93c5fd'], borderWidth: 0 }] }
             }
         };
 
@@ -227,22 +300,29 @@
             const displayId = isAgri ? 'display-agri' : 'display-tele';
             const container = document.getElementById(displayId);
             
-            // Actualizar estilo de botones en la sección
             if (element) {
                 const section = element.closest('section');
-                section.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                section.querySelectorAll('.tab-btn').forEach(b => {
+                    b.classList.remove('active');
+                    b.style.backgroundColor = ''; 
+                    b.style.color = '';
+                    b.style.borderColor = '';
+                });
                 element.classList.add('active');
+                element.style.backgroundColor = colors.teal;
+                element.style.borderColor = colors.teal;
+                element.style.color = 'white';
             }
 
             container.innerHTML = `
                 <div class="animate-in fade-in duration-500">
-                    <h3 class="text-2xl font-black mb-4 text-slate-900 leading-tight">${s.title}</h3>
-                    <p class="text-slate-600 mb-6 text-sm md:text-base">${s.desc}</p>
-                    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+                    <h3 class="text-2xl font-heading font-black mb-4 text-gray-900 leading-tight">${s.title}</h3>
+                    <p class="text-gray-600 mb-8 text-base leading-relaxed font-sans">${s.desc}</p>
+                    <ul class="grid grid-cols-1 gap-3 mb-6">
                         ${s.list.map(item => `
-                            <li class="flex items-center gap-2 text-sm text-slate-700">
-                                <span class="${isAgri ? 'text-teal-600' : 'text-blue-600'} font-bold">✓</span> 
-                                ${item}
+                            <li class="flex items-start gap-3 text-sm text-gray-700">
+                                <span class="text-lindar-copper font-bold mt-1">✓</span> 
+                                <span>${item}</span>
                             </li>
                         `).join('')}
                     </ul>
@@ -252,7 +332,6 @@
                 </div>
             `;
 
-            // Destruir y recrear gráfico
             if (charts[chartId]) charts[chartId].destroy();
             const canvasElement = document.getElementById(chartId);
             if (canvasElement) {
@@ -266,7 +345,7 @@
                         plugins: { 
                             legend: { 
                                 position: 'bottom',
-                                labels: { boxWidth: 10, font: { size: 10 } }
+                                labels: { font: { family: "'Lato', sans-serif", size: 11 }, padding: 20 }
                             } 
                         }
                     }
@@ -274,11 +353,15 @@
             }
         }
 
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
         window.onload = () => {
-            // Inicializar las dos secciones
-            showService('agri_legal', 'chart-agri', document.getElementById('btn-agri_legal'));
             showService('tele_agro', 'chart-tele', document.getElementById('btn-tele_agro'));
+            showService('agri_legal', 'chart-agri', document.getElementById('btn-agri_legal'));
         };
     </script>
 </body>
 </html>
+
