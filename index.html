@@ -216,3 +216,185 @@
                 </div>
             </div>
         </div>
+    </section>
+
+    <!-- Contacto Unificado -->
+    <footer id="contacto" class="py-24 bg-lindar-dark text-white relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-lindar-teal rounded-full blur-3xl opacity-20 -translate-y-1/2 translate-x-1/2"></div>
+        
+        <div class="container mx-auto px-4 max-w-5xl relative z-10">
+            <div class="text-center mb-16">
+                <span class="text-lindar-copper font-bold uppercase tracking-widest text-xs mb-2 block font-heading">Hablemos</span>
+                <h2 class="text-4xl md:text-5xl font-heading font-black mb-6">¿Listo para potenciar su proyecto?</h2>
+                <p class="text-gray-400 text-lg font-light">Solicite una asesoría personalizada con nuestro equipo.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Profesional 1 -->
+                <div class="bg-white/5 p-8 rounded-2xl border border-white/10 hover:border-lindar-copper/50 transition-colors backdrop-blur-sm">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-14 h-14 bg-lindar-copper rounded-full flex items-center justify-center text-white text-xl font-bold font-heading shadow-lg">ID</div>
+                        <div>
+                            <p class="text-xl font-bold font-heading">Ing. Agrim. Doporto Ignacio</p>
+                            <p class="text-lindar-copper text-xs font-bold uppercase tracking-widest">Agrimensura e Ingeniería</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3 text-gray-300 text-sm">
+                        <a href="mailto:lindar.agrimensura@gmail.com" class="flex items-center gap-3 hover:text-white transition-colors">
+                            <span class="bg-white/10 p-2 rounded-full">📧</span> lindar.agrimensura@gmail.com
+                        </a>
+                        <a href="https://wa.me/5493515195745" target="_blank" class="flex items-center gap-3 hover:text-white transition-colors">
+                            <span class="bg-white/10 p-2 rounded-full">💬</span> WhatsApp: 351 519 5745
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Profesional 2 -->
+                <div class="bg-white/5 p-8 rounded-2xl border border-white/10 hover:border-lindar-copper/50 transition-colors backdrop-blur-sm">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-14 h-14 bg-lindar-copper rounded-full flex items-center justify-center text-white text-xl font-bold font-heading shadow-lg">MM</div>
+                        <div>
+                            <p class="text-xl font-bold font-heading">Lic. Mariano Merlo</p>
+                            <p class="text-lindar-copper text-xs font-bold uppercase tracking-widest">Teledetección y SIG</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3 text-gray-300 text-sm">
+                        <a href="https://wa.me/5493404518297" target="_blank" class="flex items-center gap-3 hover:text-white transition-colors">
+                            <span class="bg-white/10 p-2 rounded-full">💬</span> WhatsApp: 340 451 8297
+                        </a>
+                        <p class="text-xs text-gray-500 mt-4 italic border-t border-white/5 pt-4">Expertos en diversas áreas geoespaciales.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-20 pt-8 border-t border-white/10 text-center text-gray-500 text-xs flex justify-between items-center flex-col md:flex-row">
+                <p>© 2026 LindAR - Soluciones Territoriales Integrales.</p>
+                <p class="mt-2 md:mt-0 font-heading font-bold text-lindar-teal">LIND<span class="text-lindar-copper">AR</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const colors = {
+            teal: '#1B4D50',
+            copper: '#C16E41',
+            lightTeal: '#E0F2F1'
+        };
+
+        const services = {
+            agri_legal: {
+                title: "Agrimensura Legal y Urbana",
+                desc: "Garantizamos la seguridad jurídica de su inmueble mediante mediciones precisas y trámites especializados.",
+                list: ["Amojonamientos de lotes", "Mensuras urbanas y rurales", "Verificación de Estado Parcelario (VEP)", "Subdivisiones y uniones"],
+                chartType: 'doughnut',
+                chartData: { labels: ['Urbano', 'Rural', 'VEP', 'Otros'], datasets: [{ data: [45, 25, 20, 10], backgroundColor: [colors.teal, '#2C7A7F', colors.copper, '#B2DFDB'], borderWidth: 0 }] }
+            },
+            agri_obras: {
+                title: "Relevamientos y Obras",
+                desc: "Soporte técnico integral para proyectos de infraestructura, minería y arquitectura.",
+                list: ["Replanteos de alta precisión", "Obras viales y civiles", "Minería e Hidráulica", "Modelos digitales del terreno"],
+                chartType: 'bar',
+                chartData: { labels: ['Vial', 'Civil', 'Minera', 'Hydráulica'], datasets: [{ label: 'Proyectos Activos', data: [12, 18, 5, 8], backgroundColor: colors.teal }] }
+            },
+            tele_agro: {
+                title: "Agricultura de Precisión",
+                desc: "Optimización de recursos mediante el análisis espacial del rendimiento y la salud del cultivo.",
+                list: ["Ambientación de lotes", "Mapas de prescripción variable", "Alertas tempranas (NDVI/EVI)", "Análisis de aptitud de suelo"],
+                chartType: 'line',
+                chartData: { labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May'], datasets: [{ label: 'Vigor Vegetativo', data: [0.2, 0.45, 0.85, 0.7, 0.4], borderColor: colors.copper, backgroundColor: 'rgba(193, 110, 65, 0.1)', fill: true, tension: 0.4 }] }
+            },
+            tele_sat: {
+                title: "Monitoreo Satelital",
+                desc: "Diagnóstico detallado de cambios territoriales y fenómenos ambientales.",
+                list: ["Detección de deforestación", "Estudios multitemporales", "Tecnología Radar (MDE/MDD)", "Gestión de riesgos hídricos"],
+                chartType: 'pie',
+                chartData: { labels: ['Bosque', 'Cultivo', 'Suelo Desnudo', 'Agua'], datasets: [{ data: [40, 30, 20, 10], backgroundColor: [colors.teal, colors.copper, '#60a5fa', '#93c5fd'], borderWidth: 0 }] }
+            },
+            tele_drones: {
+                title: "Drones y LiDAR",
+                desc: "Captura de datos de altísima resolución para modelado 3D y termografía.",
+                list: ["Topografía LiDAR + RTK", "Inspecciones termográficas", "Conteo de plantas y malezas", "Ortofotomosaicos HD"],
+                chartType: 'bar',
+                chartData: { labels: ['LiDAR', 'Térmico', 'RGB', 'Multispectral'], datasets: [{ label: 'Precisión (cm)', data: [3, 15, 2, 5], backgroundColor: colors.copper }] }
+            },
+            tele_data: {
+                title: "Inteligencia Geográfica",
+                desc: "Cruce estratégico de variables para la toma de decisiones comerciales y logísticas.",
+                list: ["Geomarketing y análisis de mercado", "Logística y distribución", "Gestión de geoportales web", "Tableros de control de datos"],
+                chartType: 'doughnut',
+                chartData: { labels: ['Logística', 'Marketing', 'Estratégico', 'Web'], datasets: [{ data: [35, 25, 30, 10], backgroundColor: [colors.teal, colors.copper, '#3b82f6', '#93c5fd'], borderWidth: 0 }] }
+            }
+        };
+
+        let charts = {};
+
+        function showService(key, chartId, element) {
+            const s = services[key];
+            const isAgri = key.startsWith('agri');
+            const displayId = isAgri ? 'display-agri' : 'display-tele';
+            const container = document.getElementById(displayId);
+            
+            if (element) {
+                const section = element.closest('section');
+                section.querySelectorAll('.tab-btn').forEach(b => {
+                    b.classList.remove('active');
+                    b.style.backgroundColor = ''; 
+                    b.style.color = '';
+                    b.style.borderColor = '';
+                });
+                element.classList.add('active');
+                element.style.backgroundColor = colors.teal;
+                element.style.borderColor = colors.teal;
+                element.style.color = 'white';
+            }
+
+            container.innerHTML = `
+                <div class="animate-in fade-in duration-500">
+                    <h3 class="text-2xl font-heading font-black mb-4 text-gray-900 leading-tight">${s.title}</h3>
+                    <p class="text-gray-600 mb-8 text-base leading-relaxed font-sans">${s.desc}</p>
+                    <ul class="grid grid-cols-1 gap-3 mb-6">
+                        ${s.list.map(item => `
+                            <li class="flex items-start gap-3 text-sm text-gray-700">
+                                <span class="text-lindar-copper font-bold mt-1">✓</span> 
+                                <span>${item}</span>
+                            </li>
+                        `).join('')}
+                    </ul>
+                </div>
+                <div class="chart-container">
+                    <canvas id="${chartId}"></canvas>
+                </div>
+            `;
+
+            if (charts[chartId]) charts[chartId].destroy();
+            const canvasElement = document.getElementById(chartId);
+            if (canvasElement) {
+                const ctx = canvasElement.getContext('2d');
+                charts[chartId] = new Chart(ctx, {
+                    type: s.chartType,
+                    data: s.chartData,
+                    options: { 
+                        responsive: true, 
+                        maintainAspectRatio: false,
+                        plugins: { 
+                            legend: { 
+                                position: 'bottom',
+                                labels: { font: { family: "'Lato', sans-serif", size: 11 }, padding: 20 }
+                            } 
+                        }
+                    }
+                });
+            }
+        }
+
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        window.onload = () => {
+            showService('tele_agro', 'chart-tele', document.getElementById('btn-tele_agro'));
+            showService('agri_legal', 'chart-agri', document.getElementById('btn-agri_legal'));
+        };
+    </script>
+</body>
+</html>
