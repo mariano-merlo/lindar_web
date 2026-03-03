@@ -65,16 +65,22 @@
             margin: 0 16px;
         }
 
-        .linkedin-btn {
+        .linkedin-icon-btn {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #f3f4f6;
             color: #0077B5;
-            font-weight: bold;
-            font-size: 0.875rem;
-            transition: opacity 0.3s;
+            border-radius: 9999px;
+            transition: all 0.3s ease;
         }
-        .linkedin-btn:hover { opacity: 0.8; }
+        .linkedin-icon-btn:hover { 
+            background-color: #0077B5;
+            color: white;
+            transform: scale(1.1);
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-700 font-sans">
@@ -160,7 +166,7 @@
 
             <div class="flex flex-wrap gap-3 mb-10">
                 <button id="btn-agri_legal" class="tab-btn active px-6 py-3 rounded-lg border border-gray-200 text-sm font-bold shadow-sm" onclick="showService('agri_legal', 'chart-agri', this)">⚖️ Agrimensura</button>
-                <button id="btn-agri_obras" class="tab-btn px-6 py-3 rounded-lg border border-gray-200 text-sm font-bold shadow-sm" onclick="showService('agri_obras', 'chart-agri', this)">🏢 Relevamientos y Replanteos</button>
+                <button id="btn-agri_obras" class="tab-btn px-6 py-3 rounded-lg border border-gray-200 text-sm font-bold shadow-sm" onclick="showService('agri_obras', 'chart-agri', this)">🏢 Obras y Topografía</button>
             </div>
 
             <div id="display-agri" class="grid lg:grid-cols-2 gap-12 items-center bg-lindar-light/30 p-8 md:p-12 rounded-3xl border border-lindar-teal/10">
@@ -180,41 +186,43 @@
 
             <div class="grid md:grid-cols-2 gap-12">
                 <!-- Perfil Ignacio -->
-                <div class="bg-white p-8 md:p-10 rounded-3xl shadow-sm border border-gray-100 flex flex-col h-full">
-                    <div class="mb-6">
-                        <h3 class="text-2xl font-heading font-bold text-lindar-teal">Ing. Ignacio Doporto</h3>
-                        <p class="text-lindar-copper font-bold text-sm uppercase tracking-wider mb-4">Ingeniero Agrimensor </p>
-                        <div class="h-px w-full bg-gray-100"></div>
+                <div class="bg-white p-8 md:p-10 rounded-3xl shadow-sm border border-gray-100 flex flex-col h-full relative">
+                    <div class="flex justify-between items-start mb-6">
+                        <div>
+                            <h3 class="text-2xl font-heading font-bold text-lindar-teal">Ing. Ignacio Doporto</h3>
+                            <p class="text-lindar-copper font-bold text-sm uppercase tracking-wider">Ingeniero Agrimensor</p>
+                        </div>
+                        <a href="https://www.linkedin.com/in/ignacio-vicente-doporto-9a23a326b/" target="_blank" class="linkedin-icon-btn" title="LinkedIn Ignacio Doporto">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                        </a>
                     </div>
+                    <div class="h-px w-full bg-gray-100 mb-6"></div>
                     <p class="text-gray-600 text-sm leading-relaxed mb-6 flex-grow">
                         Ingeniero Agrimensor por la UNLP (Mat. 1465) con vasta experiencia en Mensuras y Topografía de obra.
                         Maestrando en Aplicaciones de Información Espacial del Instituto de Altos Estudios Espaciales Mario Gulich (UNC) 
                         con investigaciones para INTA en teledetección hiperespectral aplicada al agro. Cuenta con una sólida trayectoria como asesor técnico en organismos hídricos de Buenos Aires y experiencia académica como docente de grado en la UNLP y la UCC, 
                         especializándose en Fotointerpretación, Percepción Remota e Ingeniería de Levantamientos.
                     </p>
-                    <a href="https://www.linkedin.com/in/ignacio-vicente-doporto-9a23a326b/" target="_blank" class="linkedin-btn">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                        Ver Perfil LinkedIn
-                    </a>
                 </div>
 
                 <!-- Perfil Mariano -->
-                <div class="bg-white p-8 md:p-10 rounded-3xl shadow-sm border border-gray-100 flex flex-col h-full">
-                    <div class="mb-6">
-                        <h3 class="text-2xl font-heading font-bold text-lindar-teal">Lic. Mariano Merlo</h3>
-                        <p class="text-lindar-copper font-bold text-sm uppercase tracking-wider mb-4">Lic. en Geografía (UNL)</p>
-                        <div class="h-px w-full bg-gray-100"></div>
+                <div class="bg-white p-8 md:p-10 rounded-3xl shadow-sm border border-gray-100 flex flex-col h-full relative">
+                    <div class="flex justify-between items-start mb-6">
+                        <div>
+                            <h3 class="text-2xl font-heading font-bold text-lindar-teal">Lic. Mariano Merlo</h3>
+                            <p class="text-lindar-copper font-bold text-sm uppercase tracking-wider">Lic. en Geografía</p>
+                        </div>
+                        <a href="https://www.linkedin.com/in/mariano-merlo/" target="_blank" class="linkedin-icon-btn" title="LinkedIn Mariano Merlo">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                        </a>
                     </div>
+                    <div class="h-px w-full bg-gray-100 mb-6"></div>
                     <p class="text-gray-600 text-sm leading-relaxed mb-6 flex-grow">
                         Lic. en Geografía con más de 10 años de experiencia en Teledetección y SIG,
                         Maestrando en Tecnologías de Información Geográfica. Especialista en análisis geo espacial,
                         administración de bases de datos espaciales, desarrollo de cartografía, mapas web y procesamiento avanzado de 
                         imágenes satelitales. Posee experiencia en consultorías para proyectos académicos y amplio recorrido en el ámbito privado.
                     </p>
-                    <a href="https://www.linkedin.com/in/mariano-merlo/" target="_blank" class="linkedin-btn">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                        Ver Perfil LinkedIn
-                    </a>
                 </div>
             </div>
         </div>
@@ -272,7 +280,7 @@
             </div>
 
             <div class="mt-20 pt-8 border-t border-white/10 text-center text-gray-500 text-xs flex justify-between items-center flex-col md:flex-row">
-                <p>© 2026 LindAR - Soluciones Territoriales Integrales.</p>
+                <p>© 2026 LindAR - Soluciones Territoriales.</p>
                 <p class="mt-2 md:mt-0 font-heading font-bold text-lindar-teal">LIND<span class="text-lindar-copper">AR</span></p>
             </div>
         </div>
@@ -294,11 +302,11 @@
                 chartData: { labels: ['Urbano', 'Rural', 'VEP', 'Otros'], datasets: [{ data: [45, 25, 20, 10], backgroundColor: [colors.teal, '#2C7A7F', colors.copper, '#B2DFDB'], borderWidth: 0 }] }
             },
             agri_obras: {
-                title: "Relevamientos y Replanteos para obras",
-                desc: "Soporte técnico integral para proyectos de ingenieria.",
-                list: ["Replanteos de alta precisión", "Obras viales y civiles", "Minería" "Obras Hidráulica", "Obras ferroviarias", "Obras Eléctrico-Lineales"],
+                title: "Obras y Topografía",
+                desc: "Soporte técnico integral para proyectos de ingeniería.",
+                list: ["Replanteos de alta precisión", "Obras viales y civiles", "Minería", "Obras Hidráulicas", "Obras ferroviarias", "Obras Eléctrico-Lineales"],
                 chartType: 'bar',
-                chartData: { labels: ['Vial', 'Civil', 'Minera', 'Hydráulica'], datasets: [{ label: 'Proyectos Activos', data: [12, 18, 5, 8], backgroundColor: colors.teal }] }
+                chartData: { labels: ['Vial', 'Civil', 'Minera', 'Hidráulica'], datasets: [{ label: 'Proyectos Activos', data: [12, 18, 5, 8], backgroundColor: colors.teal }] }
             },
             tele_agro: {
                 title: "Agricultura de Precisión",
@@ -398,4 +406,5 @@
     </script>
 </body>
 </html>
+
 
