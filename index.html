@@ -90,6 +90,13 @@
             border-radius: 1.5rem;
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         }
+
+        /* Ajuste para el logo de navegación */
+        .nav-logo {
+            height: 45px;
+            width: auto;
+            object-fit: contain;
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-700 font-sans">
@@ -98,9 +105,13 @@
     <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-sm">
         <div class="container mx-auto px-4 py-3 flex flex-wrap justify-between items-center">
             <div class="flex items-center">
+                <!-- Icono Principal LindAR -->
+                <div class="mr-6 flex items-center">
+                    <img src="img/icon_blanco.jpg" alt="LindAR Logo" class="nav-logo rounded-lg">
+                </div>
+
                 <!-- Unidad 1: Teledetección -->
                 <a href="#seccion-teledeteccion" class="flex items-center gap-2 group">
-                    <span class="text-3xl group-hover:scale-110 transition-transform">🛰️</span>
                     <div class="flex flex-col font-heading">
                         <span class="text-xl font-bold text-lindar-teal leading-none tracking-tight">Lind<span class="text-lindar-copper">AR</span></span>
                         <span class="text-[10px] text-lindar-copper font-bold uppercase tracking-widest">Teledetección & SIG</span>
@@ -111,7 +122,6 @@
                 
                 <!-- Unidad 2: Agrimensura -->
                 <a href="#seccion-agrimensura" class="flex items-center gap-2 group ml-4 sm:ml-0">
-                    <span class="text-3xl group-hover:scale-110 transition-transform">📐</span>
                     <div class="flex flex-col font-heading">
                         <span class="text-xl font-bold text-lindar-teal leading-none tracking-tight">Lind<span class="text-lindar-copper">AR</span></span>
                         <span class="text-[10px] text-lindar-teal font-bold uppercase tracking-widest">Ingeniería y Agrimensura</span>
@@ -308,21 +318,17 @@
                 desc: "Garantizamos la seguridad jurídica de su inmueble mediante mediciones precisas y trámites especializados.",
                 list: ["Amojonamientos de lotes", "Mensuras urbanas y rurales", "Verificación de Estado Parcelario (VEP)", "Subdivisiones y uniones"],
                 visual: { type: 'image', url: 'img/agri.jpg' }
-               // chartType: 'doughnut',
-                //chartData: { labels: ['Urbano', 'Rural', 'VEP', 'Otros'], datasets: [{ data: [45, 25, 20, 10], backgroundColor: [colors.teal, '#2C7A7F', colors.copper, '#B2DFDB'], borderWidth: 0 }] }
             },
             agri_obras: {
                 title: "Obras y Topografía",
                 desc: "Soporte técnico integral para proyectos de ingeniería.",
                 list: ["Replanteos de alta precisión", "Obras viales y civiles", "Minería", "Obras Hidráulicas", "Obras ferroviarias", "Obras Eléctrico-Lineales"],
-                // CAMBIO: Ahora usamos una imagen real de Unsplash para pruebas
                 visual: { type: 'image', url: 'img/agri_2.jpg' }
             },
             tele_agro: {
                 title: "Agricultura de Precisión",
                 desc: "Optimización de recursos mediante el análisis espacial del rendimiento y la salud del cultivo.",
                 list: ["Ambientación de lotes", "Mapas de prescripción variable", "Alertas tempranas (NDVI/EVI)", "Análisis de aptitud de suelo"],
-                // CAMBIO: Imagen real de Unsplash para agro
                 visual: { type: 'image', url: 'https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&q=80&w=800' }
             },
             tele_sat: {
@@ -370,7 +376,6 @@
                 element.style.color = 'white';
             }
 
-            // Decidimos qué HTML inyectar dependiendo de si es IMAGEN o GRÁFICO
             let visualHTML = '';
             if (s.visual && s.visual.type === 'image') {
                 visualHTML = `<img src="${s.visual.url}" alt="${s.title}" class="service-img" onerror="this.src='https://via.placeholder.com/800x600?text=Cargando+Imagen...'">`;
@@ -394,7 +399,6 @@
                 <div>${visualHTML}</div>
             `;
 
-            // Solo inicializamos el gráfico si NO es una imagen
             if (!s.visual || s.visual.type !== 'image') {
                 if (charts[chartId]) charts[chartId].destroy();
                 const canvasElement = document.getElementById(chartId);
@@ -425,6 +429,3 @@
     </script>
 </body>
 </html>
-
-
-
