@@ -91,10 +91,11 @@
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         }
 
-        /* Ajuste para el logo de navegación */
+        /* Ajuste para el logo apaisado de LindAR */
         .nav-logo {
-            height: 45px;
-            width: auto;
+            height: auto;
+            width: 180px; /* Tamaño ideal para leer LindAR */
+            max-width: 100%;
             object-fit: contain;
         }
     </style>
@@ -105,9 +106,9 @@
     <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-sm">
         <div class="container mx-auto px-4 py-3 flex flex-wrap justify-between items-center">
             <div class="flex items-center">
-                <!-- Icono Principal LindAR -->
+                <!-- Icono Principal LindAR (Nuevo logo apaisado) -->
                 <div class="mr-6 flex items-center">
-                    <img src="img/icon_blanco.jpeg" alt="LindAR Logo" class="nav-logo rounded-lg">
+                    <img src="img/icon_blanco_cartada.jpeg" alt="LindAR Logo" class="nav-logo">
                 </div>
 
                 <!-- Unidad 1: Teledetección -->
@@ -429,4 +430,3 @@
     </script>
 </body>
 </html>
-
