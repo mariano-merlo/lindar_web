@@ -81,6 +81,15 @@
             color: white;
             transform: scale(1.1);
         }
+
+        /* Estilo para las imágenes de los servicios */
+        .service-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-700 font-sans">
@@ -305,16 +314,15 @@
                 title: "Obras y Topografía",
                 desc: "Soporte técnico integral para proyectos de ingeniería.",
                 list: ["Replanteos de alta precisión", "Obras viales y civiles", "Minería", "Obras Hidráulicas", "Obras ferroviarias", "Obras Eléctrico-Lineales"],
-                visual: { type: 'image', url: 'img/agri.jpg' } // <--- USAR IMAGEN
-                //chartType: 'bar',
-                //chartData: { labels: ['Vial', 'Civil', 'Minera', 'Hidráulica'], datasets: [{ label: 'Proyectos Activos', data: [12, 18, 5, 8], backgroundColor: colors.teal }] }
+                // CAMBIO: Ahora usamos una imagen real de Unsplash para pruebas
+                visual: { type: 'image', url: 'https://images.unsplash.com/photo-1541888946425-d81bb19480c5?auto=format&fit=crop&q=80&w=800' }
             },
             tele_agro: {
                 title: "Agricultura de Precisión",
                 desc: "Optimización de recursos mediante el análisis espacial del rendimiento y la salud del cultivo.",
                 list: ["Ambientación de lotes", "Mapas de prescripción variable", "Alertas tempranas (NDVI/EVI)", "Análisis de aptitud de suelo"],
-                visual: { type: 'image', url: 'img/agri_2.jpg' } // <--- USAR IMAGEN
-                //chartData: { labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May'], datasets: [{ label: 'Vigor Vegetativo', data: [0.2, 0.45, 0.85, 0.7, 0.4], borderColor: colors.copper, backgroundColor: 'rgba(193, 110, 65, 0.1)', fill: true, tension: 0.4 }] }
+                // CAMBIO: Imagen real de Unsplash para agro
+                visual: { type: 'image', url: 'https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&q=80&w=800' }
             },
             tele_sat: {
                 title: "Monitoreo Satelital",
@@ -361,6 +369,14 @@
                 element.style.color = 'white';
             }
 
+            // Decidimos qué HTML inyectar dependiendo de si es IMAGEN o GRÁFICO
+            let visualHTML = '';
+            if (s.visual && s.visual.type === 'image') {
+                visualHTML = `<img src="${s.visual.url}" alt="${s.title}" class="service-img" onerror="this.src='https://via.placeholder.com/800x600?text=Cargando+Imagen...'">`;
+            } else {
+                visualHTML = `<div class="chart-container"><canvas id="${chartId}"></canvas></div>`;
+            }
+
             container.innerHTML = `
                 <div class="animate-in fade-in duration-500">
                     <h3 class="text-2xl font-heading font-black mb-4 text-gray-900 leading-tight">${s.title}</h3>
@@ -374,29 +390,30 @@
                         `).join('')}
                     </ul>
                 </div>
-                <div class="chart-container">
-                    <canvas id="${chartId}"></canvas>
-                </div>
+                <div>${visualHTML}</div>
             `;
 
-            if (charts[chartId]) charts[chartId].destroy();
-            const canvasElement = document.getElementById(chartId);
-            if (canvasElement) {
-                const ctx = canvasElement.getContext('2d');
-                charts[chartId] = new Chart(ctx, {
-                    type: s.chartType,
-                    data: s.chartData,
-                    options: { 
-                        responsive: true, 
-                        maintainAspectRatio: false,
-                        plugins: { 
-                            legend: { 
-                                position: 'bottom',
-                                labels: { font: { family: "'Lato', sans-serif", size: 11 }, padding: 20 }
-                            } 
+            // Solo inicializamos el gráfico si NO es una imagen
+            if (!s.visual || s.visual.type !== 'image') {
+                if (charts[chartId]) charts[chartId].destroy();
+                const canvasElement = document.getElementById(chartId);
+                if (canvasElement) {
+                    const ctx = canvasElement.getContext('2d');
+                    charts[chartId] = new Chart(ctx, {
+                        type: s.chartType,
+                        data: s.chartData,
+                        options: { 
+                            responsive: true, 
+                            maintainAspectRatio: false,
+                            plugins: { 
+                                legend: { 
+                                    position: 'bottom',
+                                    labels: { font: { family: "'Lato', sans-serif", size: 11 }, padding: 20 }
+                                } 
+                            }
                         }
-                    }
-                });
+                    });
+                }
             }
         }
 
@@ -407,6 +424,4 @@
     </script>
 </body>
 </html>
-
-
 
