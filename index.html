@@ -305,15 +305,16 @@
                 title: "Obras y Topografía",
                 desc: "Soporte técnico integral para proyectos de ingeniería.",
                 list: ["Replanteos de alta precisión", "Obras viales y civiles", "Minería", "Obras Hidráulicas", "Obras ferroviarias", "Obras Eléctrico-Lineales"],
-                chartType: 'bar',
-                chartData: { labels: ['Vial', 'Civil', 'Minera', 'Hidráulica'], datasets: [{ label: 'Proyectos Activos', data: [12, 18, 5, 8], backgroundColor: colors.teal }] }
+                visual: { type: 'image', url: 'img/agri.jpg' } // <--- USAR IMAGEN
+                //chartType: 'bar',
+                //chartData: { labels: ['Vial', 'Civil', 'Minera', 'Hidráulica'], datasets: [{ label: 'Proyectos Activos', data: [12, 18, 5, 8], backgroundColor: colors.teal }] }
             },
             tele_agro: {
                 title: "Agricultura de Precisión",
                 desc: "Optimización de recursos mediante el análisis espacial del rendimiento y la salud del cultivo.",
                 list: ["Ambientación de lotes", "Mapas de prescripción variable", "Alertas tempranas (NDVI/EVI)", "Análisis de aptitud de suelo"],
-                chartType: 'line',
-                chartData: { labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May'], datasets: [{ label: 'Vigor Vegetativo', data: [0.2, 0.45, 0.85, 0.7, 0.4], borderColor: colors.copper, backgroundColor: 'rgba(193, 110, 65, 0.1)', fill: true, tension: 0.4 }] }
+                visual: { type: 'image', url: 'img/agri_2.jpg' } // <--- USAR IMAGEN
+                //chartData: { labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May'], datasets: [{ label: 'Vigor Vegetativo', data: [0.2, 0.45, 0.85, 0.7, 0.4], borderColor: colors.copper, backgroundColor: 'rgba(193, 110, 65, 0.1)', fill: true, tension: 0.4 }] }
             },
             tele_sat: {
                 title: "Monitoreo Satelital",
@@ -406,5 +407,6 @@
     </script>
 </body>
 </html>
+
 
 
