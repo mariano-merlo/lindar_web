@@ -382,7 +382,8 @@
 
             let visualHTML = '';
             if (s.visual && s.visual.type === 'image') {
-                visualHTML = `<img src="${s.visual.url}" alt="${s.title}" class="service-img animate-in" onerror="this.src='https://via.placeholder.com/800x600?text=Cargando+Imagen...'">`;
+                // Se usa una imagen de fallback genérica en caso de que Unsplash falle
+                visualHTML = `<img src="${s.visual.url}" alt="${s.title}" class="service-img animate-in" onerror="this.src='https://placehold.co/800x600/1B4D50/FFFFFF/png?text=Inteligencia+Geografica'">`;
             } else {
                 visualHTML = `<div class="chart-container animate-in"><canvas id="${chartId}"></canvas></div>`;
             }
@@ -411,5 +412,3 @@
     </script>
 </body>
 </html>
-
-
