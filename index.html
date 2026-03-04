@@ -98,6 +98,12 @@
             max-width: 100%;
             object-fit: contain;
         }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-in { animation: fadeIn 0.5s ease-out forwards; }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-700 font-sans">
@@ -106,7 +112,7 @@
     <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-sm">
         <div class="container mx-auto px-4 py-3 flex flex-wrap justify-between items-center">
             <div class="flex items-center">
-                <!-- Icono Principal LindAR (Nuevo logo apaisado) -->
+                <!-- Icono Principal LindAR -->
                 <div class="mr-6 flex items-center">
                     <img src="img/icon_blanco_cortada.jpg" alt="LindAR Logo" class="nav-logo">
                 </div>
@@ -162,10 +168,10 @@
             </div>
 
             <div class="flex flex-wrap gap-3 mb-10">
-                <button id="btn-tele_agro" class="tab-btn active px-5 py-2 rounded-lg border border-gray-200 text-sm font-bold shadow-sm" onclick="showService('tele_agro', 'chart-tele', this)">🌱 Agro Precisión</button>
-                <button id="btn-tele_sat" class="tab-btn px-5 py-2 rounded-lg border border-gray-200 text-sm font-bold shadow-sm" onclick="showService('tele_sat', 'chart-tele', this)">🌍 Satelital</button>
-                <button id="btn-tele_drones" class="tab-btn px-5 py-2 rounded-lg border border-gray-200 text-sm font-bold shadow-sm" onclick="showService('tele_drones', 'chart-tele', this)">🛸 Drones</button>
-                <button id="btn-tele_data" class="tab-btn px-5 py-2 rounded-lg border border-gray-200 text-sm font-bold shadow-sm" onclick="showService('tele_data', 'chart-tele', this)">📊 Datos</button>
+                <button id="btn-tele_agro" class="tab-btn active px-5 py-2 rounded-lg border border-gray-200 text-sm font-bold shadow-sm" onclick="showService('tele_agro', 'chart-tele', this)">Agro Precisión</button>
+                <button id="btn-tele_sat" class="tab-btn px-5 py-2 rounded-lg border border-gray-200 text-sm font-bold shadow-sm" onclick="showService('tele_sat', 'chart-tele', this)">Satelital</button>
+                <button id="btn-tele_drones" class="tab-btn px-5 py-2 rounded-lg border border-gray-200 text-sm font-bold shadow-sm" onclick="showService('tele_drones', 'chart-tele', this)">Drones</button>
+                <button id="btn-tele_data" class="tab-btn px-5 py-2 rounded-lg border border-gray-200 text-sm font-bold shadow-sm" onclick="showService('tele_data', 'chart-tele', this)">Datos</button>
             </div>
 
             <div id="display-tele" class="grid lg:grid-cols-2 gap-12 items-center bg-white p-8 md:p-12 rounded-3xl border border-gray-200 shadow-sm">
@@ -185,8 +191,8 @@
             </div>
 
             <div class="flex flex-wrap gap-3 mb-10">
-                <button id="btn-agri_legal" class="tab-btn active px-6 py-3 rounded-lg border border-gray-200 text-sm font-bold shadow-sm" onclick="showService('agri_legal', 'chart-agri', this)">⚖️ Agrimensura</button>
-                <button id="btn-agri_obras" class="tab-btn px-6 py-3 rounded-lg border border-gray-200 text-sm font-bold shadow-sm" onclick="showService('agri_obras', 'chart-agri', this)">🏢 Obras y Topografía</button>
+                <button id="btn-agri_legal" class="tab-btn active px-6 py-3 rounded-lg border border-gray-200 text-sm font-bold shadow-sm" onclick="showService('agri_legal', 'chart-agri', this)">Agrimensura</button>
+                <button id="btn-agri_obras" class="tab-btn px-6 py-3 rounded-lg border border-gray-200 text-sm font-bold shadow-sm" onclick="showService('agri_obras', 'chart-agri', this)">Obras y Topografía</button>
             </div>
 
             <div id="display-agri" class="grid lg:grid-cols-2 gap-12 items-center bg-lindar-light/30 p-8 md:p-12 rounded-3xl border border-lindar-teal/10">
@@ -334,24 +340,21 @@
             },
             tele_sat: {
                 title: "Monitoreo Satelital",
-                desc: "Diagnóstico detallado de cambios territoriales y fenómenos ambientales.",
+                desc: "Diagnóstico detallado de cambios territoriales y fenómenos ambientales mediante imágenes de alta resolución.",
                 list: ["Detección de deforestación", "Estudios multitemporales", "Tecnología Radar (MDE/MDD)", "Gestión de riesgos hídricos"],
-                chartType: 'pie',
-                chartData: { labels: ['Bosque', 'Cultivo', 'Suelo Desnudo', 'Agua'], datasets: [{ data: [40, 30, 20, 10], backgroundColor: [colors.teal, colors.copper, '#60a5fa', '#93c5fd'], borderWidth: 0 }] }
+                visual: { type: 'image', url: 'https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&q=80&w=800' }
             },
             tele_drones: {
                 title: "Drones y LiDAR",
-                desc: "Captura de datos de altísima resolución para modelado 3D y termografía.",
-                list: ["Topografía LiDAR + RTK", "Inspecciones termográficas", "Conteo de plantas y malezas", "Ortofotomosaicos HD"],
-                chartType: 'bar',
-                chartData: { labels: ['LiDAR', 'Térmico', 'RGB', 'Multispectral'], datasets: [{ label: 'Precisión (cm)', data: [3, 15, 2, 5], backgroundColor: colors.copper }] }
+                desc: "Captura de datos de altísima resolución para modelado 3D y análisis de cultivos en tiempo real.",
+                list: ["Topografía LiDAR + RTK", "Inspecciones de salud vegetal", "Conteo de plantas y malezas", "Ortofotomosaicos multiespectrales"],
+                visual: { type: 'image', url: 'https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&q=80&w=800' }
             },
             tele_data: {
                 title: "Inteligencia Geográfica",
-                desc: "Cruce estratégico de variables para la toma de decisiones comerciales y logísticas.",
-                list: ["Geomarketing y análisis de mercado", "Logística y distribución", "Gestión de geoportales web", "Tableros de control de datos"],
-                chartType: 'doughnut',
-                chartData: { labels: ['Logística', 'Marketing', 'Estratégico', 'Web'], datasets: [{ data: [35, 25, 30, 10], backgroundColor: [colors.teal, colors.copper, '#3b82f6', '#93c5fd'], borderWidth: 0 }] }
+                desc: "Gestión avanzada de datos espaciales y visualización mediante dashboards interactivos de geomarketing.",
+                list: ["Geomarketing y análisis de mercado", "Logística y distribución eficiente", "Gestión de geoportales web", "Tableros de control y analítica BI"],
+                visual: { type: 'image', url: 'https://images.unsplash.com/photo-1551288049-bbbda536ad79?auto=format&fit=crop&q=80&w=800' }
             }
         };
 
@@ -379,13 +382,13 @@
 
             let visualHTML = '';
             if (s.visual && s.visual.type === 'image') {
-                visualHTML = `<img src="${s.visual.url}" alt="${s.title}" class="service-img" onerror="this.src='https://via.placeholder.com/800x600?text=Cargando+Imagen...'">`;
+                visualHTML = `<img src="${s.visual.url}" alt="${s.title}" class="service-img animate-in" onerror="this.src='https://via.placeholder.com/800x600?text=Cargando+Imagen...'">`;
             } else {
-                visualHTML = `<div class="chart-container"><canvas id="${chartId}"></canvas></div>`;
+                visualHTML = `<div class="chart-container animate-in"><canvas id="${chartId}"></canvas></div>`;
             }
 
             container.innerHTML = `
-                <div class="animate-in fade-in duration-500">
+                <div class="animate-in">
                     <h3 class="text-2xl font-heading font-black mb-4 text-gray-900 leading-tight">${s.title}</h3>
                     <p class="text-gray-600 mb-8 text-base leading-relaxed font-sans">${s.desc}</p>
                     <ul class="grid grid-cols-1 gap-3 mb-6">
@@ -399,28 +402,6 @@
                 </div>
                 <div>${visualHTML}</div>
             `;
-
-            if (!s.visual || s.visual.type !== 'image') {
-                if (charts[chartId]) charts[chartId].destroy();
-                const canvasElement = document.getElementById(chartId);
-                if (canvasElement) {
-                    const ctx = canvasElement.getContext('2d');
-                    charts[chartId] = new Chart(ctx, {
-                        type: s.chartType,
-                        data: s.chartData,
-                        options: { 
-                            responsive: true, 
-                            maintainAspectRatio: false,
-                            plugins: { 
-                                legend: { 
-                                    position: 'bottom',
-                                    labels: { font: { family: "'Lato', sans-serif", size: 11 }, padding: 20 }
-                                } 
-                            }
-                        }
-                    });
-                }
-            }
         }
 
         window.onload = () => {
@@ -430,4 +411,5 @@
     </script>
 </body>
 </html>
+
 
