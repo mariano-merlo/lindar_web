@@ -312,7 +312,7 @@
         </div>
     </footer>
 
-    <script>
+   <script>
         const colors = {
             teal: '#1B4D50',
             copper: '#C16E41',
@@ -382,8 +382,12 @@
 
             let visualHTML = '';
             if (s.visual && s.visual.type === 'image') {
-                // Se usa una imagen de fallback genérica en caso de que Unsplash falle
-                visualHTML = `<img src="${s.visual.url}" alt="${s.title}" class="service-img animate-in" onerror="this.src='https://placehold.co/800x600/1B4D50/FFFFFF/png?text=Inteligencia+Geografica'">`;
+                // Mejora aplicada: Envolvemos la imagen en el contenedor de recorte
+                visualHTML = `
+                    <div class="service-img-container animate-in">
+                        <img src="${s.visual.url}" alt="${s.title}" class="service-img" 
+                             onerror="this.src='https://placehold.co/800x600/1B4D50/FFFFFF/png?text=LindAR+${s.title}'">
+                    </div>`;
             } else {
                 visualHTML = `<div class="chart-container animate-in"><canvas id="${chartId}"></canvas></div>`;
             }
@@ -406,9 +410,8 @@
         }
 
         window.onload = () => {
+            // Inicializamos con las pestañas por defecto
             showService('tele_agro', 'chart-tele', document.getElementById('btn-tele_agro'));
             showService('agri_legal', 'chart-agri', document.getElementById('btn-agri_legal'));
         };
     </script>
-</body>
-</html>
