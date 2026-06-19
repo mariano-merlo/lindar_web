@@ -170,7 +170,9 @@
             <div class="flex flex-wrap gap-3 mb-10">
                 <button id="btn-tele_agro" class="tab-btn active px-5 py-2 rounded-lg border border-gray-200 text-sm font-bold shadow-sm" onclick="showService('tele_agro', 'chart-tele', this)">Agro Precisión</button>
                 <button id="btn-tele_sat" class="tab-btn px-5 py-2 rounded-lg border border-gray-200 text-sm font-bold shadow-sm" onclick="showService('tele_sat', 'chart-tele', this)">Satelital</button>
+                <!-- DRONES DESACTIVADO (HTML COMENTADO)
                 <button id="btn-tele_drones" class="tab-btn px-5 py-2 rounded-lg border border-gray-200 text-sm font-bold shadow-sm" onclick="showService('tele_drones', 'chart-tele', this)">Drones</button>
+                -->
                 <button id="btn-tele_data" class="tab-btn px-5 py-2 rounded-lg border border-gray-200 text-sm font-bold shadow-sm" onclick="showService('tele_data', 'chart-tele', this)">Datos</button>
             </div>
 
@@ -312,7 +314,7 @@
         </div>
     </footer>
 
-  <style>
+    <style>
         /* 1. ESTILOS BASE Y CONTENEDORES */
         .service-img-container {
             width: 100%;
@@ -381,12 +383,14 @@
                 list: ["Detección de deforestación", "Estudios multitemporales", "Tecnología Radar (MDE/MDD)", "Gestión de riesgos hídricos"],
                 visual: { type: 'image', url: 'https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&q=80&w=800' }
             },
+            /* DRONES DESACTIVADO (JAVASCRIPT COMENTADO)
             tele_drones: {
                 title: "Drones y LiDAR",
                 desc: "Captura de datos de altísima resolución para modelado 3D y análisis de cultivos en tiempo real.",
                 list: ["Topografía LiDAR + RTK", "Inspecciones de salud vegetal", "Conteo de plantas y malezas", "Ortofotomosaicos multiespectrales"],
                 visual: { type: 'image', url: 'img/drones.jpg' }
             },
+            */
             tele_data: {
                 title: "Inteligencia Geográfica",
                 desc: "Gestión avanzada de datos espaciales y visualización mediante dashboards interactivos de geomarketing.",
@@ -452,3 +456,5 @@
             showService('agri_legal', 'chart-agri', document.getElementById('btn-agri_legal'));
         };
     </script>
+</body>
+</html>
